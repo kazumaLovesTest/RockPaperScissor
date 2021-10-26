@@ -9,7 +9,7 @@ function computerPlay(){
 }
 
 function playRound(computerSelection,playerSelection){ 
-    console.log(computerSelection);
+    console.log(`The computer's selection: ${computerSelection}`);
     if (computerSelection === playerSelection)
         return "Tie";
     else if (computerSelection === "paper"){
@@ -29,10 +29,9 @@ function playRound(computerSelection,playerSelection){
             return "You lose. scissor beats paper";
         else
             return "You win. rock beats scissor";
-    }
-
-        
+    }   
 }
+
 let games = parseInt(window.prompt("how many games would you like to play: "));
 while (games > 0) {
     const playerSelection = window.prompt("Enter rock, paper or scissor: ");
