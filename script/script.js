@@ -5,20 +5,40 @@ function computerPlay(){
    else if(choice === 2)
     return "paper";
    else
-    return "scissor"; 
+    return "scissor";
 }
-function playRound(computerSelection,playerSelection){
-    
+
+function playRound(computerSelection,playerSelection){ 
     console.log(computerSelection);
-    if (computerSelection === "rock" && playerSelection === "rock"){
-        console.log("tie");
+    if (computerSelection === playerSelection)
+        return "Tie";
+    else if (computerSelection === "paper"){
+        if (playerSelection === "rock")
+            return "You lose. paper beats rock";
+        else
+            return "You Win. scissor beats paper";
     }
-    else if (computerSelection == "paper" && playerSelection === "rock"){
-        console.log("You lose. paper beats rock");
+    else if (computerSelection === "rock"){
+        if (playerSelection === "scissor")
+            return "You lose. rock beats scissor";
+        else
+            return "You win. paper beats rock";
     }
-    else
-        console.log("You win. rock beats scissor");;
+    else{
+        if (playerSelection === "paper")
+            return "You lose. scissor beats paper";
+        else
+            return "You win. rock beats scissor";
+    }
+
+        
 }
-const playerSelection = "rock";
-let computerSelection = computerPlay();
-playRound(computerSelection,playerSelection);
+let games = parseInt(window.prompt("how many games would you like to play: "));
+while (games > 0) {
+    const playerSelection = window.prompt("Enter rock, paper or scissor: ");
+    playerSelection.toLowerCase();
+    const computerSelection = computerPlay();
+    const result = playRound(computerSelection,playerSelection);
+    console.log(result);
+    --games; 
+}
