@@ -3,11 +3,11 @@ const buttons = document.querySelectorAll('button');
 const score = document.querySelector('#score');
 let playerScore = 0;
 let computerScore = 0;
+function _listener(e){
+    selectChoice(e.target.id);
+}
 buttons.forEach((button) => {
-    button.addEventListener('click', function(e) {
-        selectChoice(e.target.id);
-    });
-    
+    button.addEventListener('click', _listener);
 });
 
 function selectChoice(buttonId){
@@ -15,6 +15,7 @@ function selectChoice(buttonId){
     const computerSelection = computerPlay();
     const result = playRound(computerSelection,playerSelection);
     showResult(result);
+    gameEndCheck(playerScore,computerScore);
 }
 
 function showResult (result){
@@ -64,10 +65,25 @@ function lose (playerSelection,computerSelection){
     updateScore(false);
     return `You lose. ${computerSelection} beats ${playerSelection}.`;
 }
+
 function updateScore(playerWin){
     if (playerWin === true)
         playerScore++;
     else
         computerScore++; 
+}
+
+function gameEndCheck(playerScore,computerScore){
+    if (playerScore === 5 || computerScore === 5){
+        buttons.forEach((button)=>{
+            button.removeEventListener('click',_listener);
+        })
+    const winMessage = document.querySelector('#winMessage');
+    if (playerScore === 5)
+        winMessage.textContent = "congratualations you won the game";
+    else
+        winMessage.textContent = "Better luck next time buddy";
+    }
+
 }
 
