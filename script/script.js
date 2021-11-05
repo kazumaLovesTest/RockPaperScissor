@@ -1,7 +1,6 @@
 const results = document.querySelector('#results');
 const buttons = document.querySelectorAll('button');
 const score = document.querySelector('#score');
-const resultDiv = document.createElement('div');
 let playerScore = 0;
 let computerScore = 0;
 buttons.forEach((button) => {
@@ -19,10 +18,7 @@ function selectChoice(buttonId){
 }
 
 function showResult (result){
-    if (results.hasChildNodes())
-        results.removeChild(resultDiv);
-    resultDiv.textContent = result;
-    results.append(resultDiv);    
+    results.textContent = result; 
     score.textContent = `playerScore = ${playerScore} computerScore = ${computerScore}`;
 }
 
