@@ -1,3 +1,4 @@
+const results = document.querySelector('#Results');
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', function(e) {
@@ -10,8 +11,15 @@ function selectChoice(buttonId){
     const playerSelection = buttonId.toLowerCase();
     const computerSelection = computerPlay();
     const result = playRound(computerSelection,playerSelection);
-    console.log(result);
+    showResult(result)
 }
+
+function showResult (result){
+    const resultDiv = document.createElement('div');
+    resultDiv.textContent = result;
+    results.append(resultDiv);    
+}
+
 function computerPlay(){
    let choice = Math.floor(Math.random() * (4 - 1) + 1);
    if (choice === 1)
@@ -23,27 +31,31 @@ function computerPlay(){
 }
 
 function playRound(computerSelection,playerSelection){ 
-    console.log(`The computer's selection: ${computerSelection}`);
     if (computerSelection === playerSelection)
         return "Tie";
     else if (computerSelection === "paper"){
         if (playerSelection === "rock")
-            return "You lose. paper beats rock";
+            return lose(playerSelection,computerSelection);
         else
-            return "You Win. scissor beats paper";
+            return win(playerSelection,computerSelection);
     }
     else if (computerSelection === "rock"){
         if (playerSelection === "scissor")
-            return "You lose. rock beats scissor";
+            return lose(playerSelection,computerSelection);
         else
-            return "You win. paper beats rock";
+            return win(playerSelection,computerSelection);
     }
     else{
         if (playerSelection === "paper")
-            return "You lose. scissor beats paper";
+            return lose (playerSelection,computerSelection);
         else
-            return "You win. rock beats scissor";
+            return win(playerSelection,computerSelection);
     }   
 }
-
+function win(playerSelection,computerSelection){
+    return `You win. ${playerSelection} beats ${computerSelection}.` ;
+}
+function lose (playerSelection,computerSelection){
+    return `You lose. ${computerSelection} beats ${playerSelection}.`;
+}
 
