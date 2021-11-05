@@ -1,5 +1,9 @@
-const results = document.querySelector('#Results');
+const results = document.querySelector('#results');
 const buttons = document.querySelectorAll('button');
+const score = document.querySelector('#score');
+const resultDiv = document.createElement('div');
+let playerScore = 0;
+let computerScore = 0;
 buttons.forEach((button) => {
     button.addEventListener('click', function(e) {
         selectChoice(e.target.id);
@@ -11,13 +15,15 @@ function selectChoice(buttonId){
     const playerSelection = buttonId.toLowerCase();
     const computerSelection = computerPlay();
     const result = playRound(computerSelection,playerSelection);
-    showResult(result)
+    showResult(result);
 }
 
 function showResult (result){
-    const resultDiv = document.createElement('div');
+    if (results.hasChildNodes())
+        results.removeChild(resultDiv);
     resultDiv.textContent = result;
     results.append(resultDiv);    
+    score.textContent = `playerScore = ${playerScore} computerScore = ${computerScore}`;
 }
 
 function computerPlay(){
@@ -52,10 +58,20 @@ function playRound(computerSelection,playerSelection){
             return win(playerSelection,computerSelection);
     }   
 }
+
 function win(playerSelection,computerSelection){
+    updateScore(true);
     return `You win. ${playerSelection} beats ${computerSelection}.` ;
 }
+
 function lose (playerSelection,computerSelection){
+    updateScore(false);
     return `You lose. ${computerSelection} beats ${playerSelection}.`;
+}
+function updateScore(playerWin){
+    if (playerWin === true)
+        playerScore++;
+    else
+        computerScore++; 
 }
 
