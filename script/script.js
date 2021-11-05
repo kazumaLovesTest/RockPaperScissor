@@ -1,3 +1,17 @@
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', function(e) {
+        selectChoice(e.target.id);
+    });
+    
+});
+
+function selectChoice(buttonId){
+    const playerSelection = buttonId.toLowerCase();
+    const computerSelection = computerPlay();
+    const result = playRound(computerSelection,playerSelection);
+    console.log(result);
+}
 function computerPlay(){
    let choice = Math.floor(Math.random() * (4 - 1) + 1);
    if (choice === 1)
@@ -31,16 +45,5 @@ function playRound(computerSelection,playerSelection){
             return "You win. rock beats scissor";
     }   
 }
-const buttons = document.querySelectorAll('button');
-buttons.forEach((button) => {
-    button.addEventListener('click', function(e) {
-        selectChoice(e.target.id);
-    });
-    
-});
-function selectChoice(buttonId){
-    const playerSelection = buttonId.toLowerCase();
-    const computerSelection = computerPlay();
-    const result = playRound(computerSelection,playerSelection);
-    console.log(result);
-}
+
+
