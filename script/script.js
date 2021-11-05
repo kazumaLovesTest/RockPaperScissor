@@ -31,28 +31,16 @@ function playRound(computerSelection,playerSelection){
             return "You win. rock beats scissor";
     }   
 }
-// let games = parseInt(window.prompt("how many games would you like to play: "));
-// while (games > 0) {
-//     const playerSelection = window.prompt("Enter rock, paper or scissor: ");
-//     playerSelection.toLowerCase();
-//     const computerSelection = computerPlay();
-//     const result = playRound(computerSelection,playerSelection);
-//     console.log(result);
-//     --games; 
-// }
 const buttons = document.querySelectorAll('button');
-buttons.forEach((button) =>  {
-    button.addEventListener('click', () => {
-    const playerSelection = button.id.toLowerCase();
+buttons.forEach((button) => {
+    button.addEventListener('click', function(e) {
+        selectChoice(e.target.id);
+    });
+    
+});
+function selectChoice(buttonId){
+    const playerSelection = buttonId.toLowerCase();
     const computerSelection = computerPlay();
     const result = playRound(computerSelection,playerSelection);
     console.log(result);
-    });
-})
-// function selectChoice(button){
-//     const playerSelection = button.id;
-//     playerSelection.toLowerCase();
-//     const computerSelection = computerPlay();
-//     const result = playRound(computerSelection,playerSelection);
-//     console.log(result);
-// }
+}
